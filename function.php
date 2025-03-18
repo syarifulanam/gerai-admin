@@ -2,7 +2,7 @@
 session_start();
 
 // Membuat koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "db_geraipajak");
+$conn = mysqli_connect("127.0.0.1", "root", "", "db_geraipajak");
 
 //Menambahkan User Baru
 if (isset($_POST['addusers'])) {
