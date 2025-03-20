@@ -1,6 +1,5 @@
 <?php
 session_start();
-require 'function.php';
 
 //Cek login, terdaftar apa tidak
 if (isset($_POST['login'])) {
