@@ -1,7 +1,6 @@
 <?php
-require 'function.php';
+require 'function-user.php';
 require 'cek.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +84,7 @@ require 'cek.php';
                         <tbody>
 
                             <?php
-                            $ambilsemuadataadmin = mysqli_query($conn, "SELECT * FROM login");
+                            $ambilsemuadataadmin = mysqli_query($conn, "SELECT * FROM users");
                             if (!$ambilsemuadataadmin) {
                             }
                             $i = 1;
@@ -146,7 +145,8 @@ require 'cek.php';
                                                 </div>
                                                 <!-- Modal Body -->
                                                 <div class="modal-body">
-                                                    Apakah Anda yakin ingin menghapus <?= htmlspecialchars($em); ?>?
+
+                                                    Are you sure you want to delete <?= htmlspecialchars($em); ?>?
                                                     <input type="hidden" name="id" value="<?= $iduser; ?>">
                                                 </div>
                                                 <!-- Modal Footer -->

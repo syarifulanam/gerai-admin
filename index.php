@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+require 'function-user.php';
 require 'cek.php';
 ?>
 

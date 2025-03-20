@@ -1,27 +1,5 @@
 <?php
-require 'function.php';
-
-//cek login, terdaftar atau tidak
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where email='$email' and password='$password'");
-    //hitung jumlah data
-    $hitung = mysqli_num_rows($cekdatabase);
-
-    if ($hitung > 0) {
-        $_SESSION['log'] = 'True';
-        header('location: index.php');
-    } else {
-        header('location: login.php');
-    };
-};
-
-if (!isset($_SESSION['log'])) {
-} else {
-    header('location: index.php');
-}
+require 'function-login.php';
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +62,7 @@ if (!isset($_SESSION['log'])) {
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <button href="login.php" name="login" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                         <hr>
