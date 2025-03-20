@@ -1,6 +1,6 @@
 <?php
-require 'function-user.php';
-require 'cek.php';
+session_start();
+require 'check.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +14,7 @@ require 'cek.php';
     content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
+  <link rel="icon" type="image/x-icon" href="img/icon-geraipajak.png">
 
   <title>Gerai Admin</title>
 

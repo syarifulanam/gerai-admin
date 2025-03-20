@@ -1,6 +1,7 @@
 <?php
+session_start();
+require 'check.php';
 require 'function-user.php';
-require 'cek.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

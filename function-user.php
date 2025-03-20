@@ -1,8 +1,5 @@
 <?php
-session_start();
-
-// Membuat koneksi ke database
-$conn = mysqli_connect("127.0.0.1", "root", "", "geraiadmin");
+require 'function-conn.php';
 
 //Menambahkan User Baru
 if (isset($_POST['addusers'])) {
