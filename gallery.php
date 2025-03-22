@@ -15,7 +15,7 @@ require 'function-user.php';
   <meta name="author" content="">
   <link rel="icon" type="image/x-icon" href="img/icon-geraipajak.png">
 
-  <title>Dashboard</title>
+  <title>Gallery</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
