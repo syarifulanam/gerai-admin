@@ -28,7 +28,7 @@ require 'function-user.php';
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
 </head>
 
 
@@ -50,6 +50,143 @@ require 'function-user.php';
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+          <h1 class="h3 mb-2 text-gray-800">Gallery</h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Data All Gallery</h6>
+            </div>
+            <div class="card-body">
+              <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAddBarang">
+                Add Gallery
+              </button>
+              <div class="modal fade" id="modalAddBarang">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form method="post" action="">
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">Gallery</h4>
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                      </div>
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label class="form-label">Email User</label>
+                          <input type="email" name="emailuser" class="form-control" placeholder="masukan email" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Password</label>
+                          <input type="password" name="password" class="form-control" placeholder="masukan password baru" required>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success" name="addusers">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Email User</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>No</th>
+                      <th>Email User</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <?php
+                    $ambilsemuadataadmin = mysqli_query($conn, "SELECT * FROM users");
+                    // if (!$ambilsemuadataadmin) {
+                    // }
+                    $i = 1;
+                    while ($data = mysqli_fetch_array($ambilsemuadataadmin)) {
+                      $em = $data['email'];
+                      $iduser = $data['iduser'];
+                      $pw = $data['password'];
+                    ?>
+                      <tr>
+                        <td><?= $i++; ?></td>
+                        <td><?= $em; ?></td>
+                        <td>
+                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?= $iduser; ?>">Edit</button>
+                          <!-- Edit Admin -->
+                          <div class="modal fade" id="edit<?= $iduser; ?>">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <form method="post" action="users.php">
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Users</h4>
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                  </div>
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+                                    <div class="mb-3">
+                                      <label class="form-label">Email User</label>
+                                      <input type="email" name="emailuser" value="<?= $em; ?>" class="form-control" placeholder="masukan email baru" required>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label class="form-label">Password</label>
+                                      <input type="password" name="password" value="<?= $pw; ?>" class="form-control" placeholder="masukan password baru">
+                                    </div>
+                                    <input type="hidden" name="id" value="<?= $iduser; ?>">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-warning" name="updateuser">Submit</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $iduser; ?>">Delete</button>
+                          <!-- Delete Admin Modal -->
+                          <div class="modal fade" id="delete<?= $iduser; ?>">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <form method="post" action="users.php">
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Delete User</h4>
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                  </div>
+                                  <!-- Modal Body -->
+                                  <div class="modal-body">
+
+                                    Are you sure you want to delete <?= htmlspecialchars($em); ?>?
+                                    <input type="hidden" name="id" value="<?= $iduser; ?>">
+                                  </div>
+                                  <!-- Modal Footer -->
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger" name="hapususer">Delete</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    <?php }; ?>
+                  </tbody>
+                </table>
+              </div>
+              </tr>
+            </div>
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -61,7 +198,7 @@ require 'function-user.php';
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
