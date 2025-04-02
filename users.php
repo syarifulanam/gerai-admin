@@ -74,11 +74,11 @@ require 'function-user.php';
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label class="form-label">Email User</label>
-                                                    <input type="email" name="emailuser" class="form-control" placeholder="masukan email" required>
+                                                    <input type="email" name="emailuser" class="form-control" placeholder="Input email" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Password</label>
-                                                    <input type="password" name="password" class="form-control" placeholder="masukan password baru" required>
+                                                    <input type="password" name="password" class="form-control" placeholder="Input New Password" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -135,11 +135,11 @@ require 'function-user.php';
                                                                     <div class="modal-body">
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Email User</label>
-                                                                            <input type="email" name="emailuser" value="<?= $em; ?>" class="form-control" placeholder="masukan email baru" required>
+                                                                            <input type="email" name="emailuser" value="<?= $em; ?>" class="form-control" placeholder="Input New Email" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Password</label>
-                                                                            <input type="password" name="password" value="<?= $pw; ?>" class="form-control" placeholder="masukan password baru">
+                                                                            <input type="password" name="password" value="<?= $pw; ?>" class="form-control" placeholder="Input New Password">
                                                                         </div>
                                                                         <input type="hidden" name="id" value="<?= $iduser; ?>">
                                                                     </div>

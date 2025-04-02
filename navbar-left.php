@@ -27,6 +27,21 @@
             <span>Dashboard</span></a>
     </li>
 
+    <!-- Nav Item - Blog -->
+    <li class="nav-item <?= ($current_page == 'blog.php') ? 'active' : '' ?>">
+        <a class="nav-link" href="blog.php">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span></a>
+    </li>
+
+    <!-- Nav Item - Category -->
+    <li class="nav-item <?= ($current_page == 'category.php') ? 'active' : '' ?>">
+        <a class="nav-link" href="category.php">
+            <i class="fa fa-window-restore"></i>
+            <span>Category</span></a>
+    </li>
+
+    <!-- Nav Item - Galerry -->
     <li class="nav-item <?= ($current_page == 'gallery.php') ? 'active' : '' ?>">
         <a class="nav-link" href="gallery.php">
             <i class="fas fa-image"></i>
@@ -39,7 +54,6 @@
             <i class="fas fa-user"></i>
             <span>Users</span></a>
     </li>
-
 
     <!-- Nav Item - Logout -->
     <!-- <li class="nav-item">
