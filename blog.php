@@ -1,10 +1,9 @@
 <?php
 session_start();
 require 'check.php';
-require 'function-user.php';
-require 'function-gallery.php';
-
+require 'function-blog.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,31 +75,28 @@ require 'function-gallery.php';
               <div class="modal fade" id="modalAddBarang">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                    <form method="post" action="">
+                    <form method="post" enctype="multipart/form-data">
                       <!-- Modal Header -->
                       <div class="modal-header">
                         <h4 class="modal-title">Blog</h4>
-                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                       </div>
                       <!-- Modal body -->
                       <div class="modal-body">
                         <div class="mb-3">
                           <label class="form-label">Title</label>
-                          <input type="text" name="name" class="form-control" placeholder="Input Name" required>
+                          <input type="text" name="title" class="form-control" placeholder="Input Name" required>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Content</label>
-                          <input type="text" name="name" class="form-control" placeholder="Input Name" required>
+                          <input type="text" name="content" class="form-control" placeholder="Input Content" required>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Category</label>
                           <br>
                           <select class="form-select" name="category" required>
-                            <option selected>Pilih Category</option>
+                            <option selected>Select Category</option>
                             <?php
                             $ambilsemuadata = mysqli_query($conn, "SELECT * FROM categories");
-
-                            $i = 1;
                             while ($data = mysqli_fetch_array($ambilsemuadata)) {
                               $name = $data['name'];
                               $id = $data['id'];
@@ -115,7 +111,7 @@ require 'function-gallery.php';
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-success" name="addCategory">Submit</button>
+                          <button type="submit" class="btn btn-success" name="addBlog">Submit</button>
                         </div>
                     </form>
                   </div>
@@ -159,7 +155,7 @@ require 'function-gallery.php';
                     $content = $data['content'];
                     $media = $data['media'];
 
-                    $picture = $data['picture'];
+                    $picture = $data['media'];
                     if ($picture == null) {
                       $picture = 'No Photo';
                     } else {
@@ -172,61 +168,78 @@ require 'function-gallery.php';
                       <td><?= $category_name; ?></td>
                       <td><?= $title; ?></td>
                       <td><?= $content; ?></td>
-                      <td><?= $media; ?></td>
+                      <td><?= $picture; ?></td>
                       <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?= $id; ?>">Edit</button>
-                        <!-- Edit Admin -->
                         <div class="modal fade" id="edit<?= $id; ?>">
+                          <!-- Edit Admin -->
                           <div class="modal-dialog">
                             <div class="modal-content">
-                              <form method="post" action="">
+                              <form method="post" enctype="multipart/form-data">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                   <h4 class="modal-title">Blog</h4>
-                                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                  <div class="mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" name="name" value="<?= $name; ?>" class="form-control" placeholder="Input Name" required>
-                                  </div>
                                   <input type="hidden" name="id" value="<?= $id; ?>">
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                                  <button type="submit" class="btn btn-warning" name="updateBlog">Submit</button>
-                                </div>
+
+                                  <div class="mb-3">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" name="title" class="form-control" placeholder="Input Name" value="<?= $title; ?>" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">Content</label>
+                                    <input type="text" name="content" class="form-control" placeholder="Input Content" value="<?= $content; ?>" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <br>
+                                    <select class="form-select" name="category" required>
+                                      <?php
+                                      $ambilsemuadata = mysqli_query($conn, "SELECT * FROM categories");
+                                      while ($data = mysqli_fetch_array($ambilsemuadata)) {
+                                        $name = $data['name'];
+                                        $id = $data['id'];
+                                      ?>
+                                        <option value="<?= $id ?>" <?= ($id == $category_id) ? 'selected' : '' ?>><?= $name ?></option>
+                                      <?php } ?>
+                                    </select>
+                                  </div>
+
+                                  <div class="mb-3">
+                                    <label class="form-label">Media</label>
+                                    <div class="mb-3">
+                                      <?= $picture; ?>
+                                    </div>
+                                    <input type="file" name="file" class="form-control">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success" name="updateBlog">Submit</button>
+                                  </div>
                               </form>
                             </div>
                           </div>
                         </div>
-
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">Delete</button>
+                        <!-- delete -->
+                        <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">Delete</button>
                         <div class="modal fade" id="delete<?= $id; ?>">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form method="post" action="">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                  <h4 class="modal-title">Delete Category</h4>
-                                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
-                                </div>
-                                <!-- Modal Body -->
                                 <div class="modal-body">
-
-                                  Are you sure you want to delete <?= htmlspecialchars($name); ?>?
+                                  Are you sure you want to delete "<strong><?= htmlspecialchars($title); ?></strong>"?
                                   <input type="hidden" name="id" value="<?= $id; ?>">
                                 </div>
-                                <!-- Modal Footer -->
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                   <button type="submit" class="btn btn-danger" name="hapusBlog">Delete</button>
                                 </div>
                               </form>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                       </td>
                     </tr>
                   <?php }; ?>
