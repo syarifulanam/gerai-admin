@@ -67,3 +67,12 @@ if (isset($_POST['hapusBlog'])) {
         die("Error deleting blog: " . mysqli_error($conn));
     }
 }
+
+
+function shortenText($text, $limit = 100)
+{
+    if (strlen($text) > $limit) {
+        return substr($text, 0, $limit) . "...";
+    }
+    return $text;
+}

@@ -17,7 +17,6 @@ require 'function-blog.php';
   <link rel="icon" type="image/x-icon" href="img/icon-geraipajak.png">
 
   <title>Blog</title>
-
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
@@ -69,26 +68,22 @@ require 'function-blog.php';
               <h6 class="m-0 font-weight-bold text-primary">Data All Post</h6>
             </div>
             <div class="card-body">
-              <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAddBarang">
+              <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAdd">
                 Add Blog
               </button>
-              <div class="modal fade" id="modalAddBarang">
-                <div class="modal-dialog">
+              <div class="modal fade" id="modalAdd">
+                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <form method="post" enctype="multipart/form-data">
                       <!-- Modal Header -->
                       <div class="modal-header">
-                        <h4 class="modal-title">Blog</h4>
+                        <h4 class="modal-title">Add Blog</h4>
                       </div>
                       <!-- Modal body -->
                       <div class="modal-body">
                         <div class="mb-3">
                           <label class="form-label">Title</label>
                           <input type="text" name="title" class="form-control" placeholder="Input Name" required>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Content</label>
-                          <input type="text" name="content" class="form-control" placeholder="Input Content" required>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Category</label>
@@ -108,6 +103,10 @@ require 'function-blog.php';
                         <div class="mb-3">
                           <label class="form-label">Media</label>
                           <input type="file" name="file" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Content</label>
+                          <textarea name="content" rows="10" id="content" class="form-control" required></textarea>
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
@@ -167,18 +166,18 @@ require 'function-blog.php';
                       <td><?= $i++; ?></td>
                       <td><?= $category_name; ?></td>
                       <td><?= $title; ?></td>
-                      <td><?= $content; ?></td>
+                      <td><?= shortenText($content, 200); ?> <a href="#" data-bs-toggle="modal" data-bs-target="#edit<?= $id; ?>">Read More</a></td>
                       <td><?= $picture; ?></td>
                       <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?= $id; ?>">Edit</button>
                         <div class="modal fade" id="edit<?= $id; ?>">
                           <!-- Edit Admin -->
-                          <div class="modal-dialog">
+                          <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                               <form method="post" enctype="multipart/form-data">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                  <h4 class="modal-title">Blog</h4>
+                                  <h4 class="modal-title">Edit Blog</h4>
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
@@ -187,10 +186,6 @@ require 'function-blog.php';
                                   <div class="mb-3">
                                     <label class="form-label">Title</label>
                                     <input type="text" name="title" class="form-control" placeholder="Input Name" value="<?= $title; ?>" required>
-                                  </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">Content</label>
-                                    <input type="text" name="content" class="form-control" placeholder="Input Content" value="<?= $content; ?>" required>
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label">Category</label>
@@ -206,13 +201,16 @@ require 'function-blog.php';
                                       <?php } ?>
                                     </select>
                                   </div>
-
                                   <div class="mb-3">
                                     <label class="form-label">Media</label>
                                     <div class="mb-3">
                                       <?= $picture; ?>
                                     </div>
                                     <input type="file" name="file" class="form-control">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">Content</label>
+                                    <textarea name="content" rows="10" id="content" class="form-control" required><?= $content; ?></textarea>
                                   </div>
                                   <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
@@ -273,6 +271,7 @@ require 'function-blog.php';
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
 </body>
 
 </html>
