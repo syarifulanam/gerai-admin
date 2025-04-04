@@ -60,8 +60,8 @@ if (isset($_POST['hapusBlog'])) {
     $id = $_POST['id'];
 
     // Debugging: Periksa apakah ID benar-benar terkirim
-    var_dump($id);
-    die();
+    // var_dump($id);
+    // die();
 
     $query = "DELETE FROM posts WHERE id='$id'";
 

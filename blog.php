@@ -126,7 +126,7 @@ require 'function-blog.php';
                     <th>Title</th>
                     <th>Content</th>
                     <th>Media</th>
-                    <th>Action</th>
+                    <th style="width: 10%;">Action</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -194,10 +194,10 @@ require 'function-blog.php';
                                       <?php
                                       $ambilsemuadata = mysqli_query($conn, "SELECT * FROM categories");
                                       while ($data = mysqli_fetch_array($ambilsemuadata)) {
-                                        $name = $data['name'];
-                                        $id = $data['id'];
+                                        $cat_name = $data['name'];
+                                        $cat_id = $data['id'];
                                       ?>
-                                        <option value="<?= $id ?>" <?= ($id == $category_id) ? 'selected' : '' ?>><?= $name ?></option>
+                                        <option value="<?= $cat_id ?>" <?= ($cat_id == $category_id) ? 'selected' : '' ?>><?= $cat_name ?></option>
                                       <?php } ?>
                                     </select>
                                   </div>
@@ -212,22 +212,23 @@ require 'function-blog.php';
                                     <label class="form-label">Content</label>
                                     <textarea name="content" rows="10" id="content" class="form-control" required><?= $content; ?></textarea>
                                   </div>
-                                  <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-success" name="updateBlog">Submit</button>
-                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                  <button type="submit" class="btn btn-success" name="updateBlog">Submit</button>
+                                </div>
                               </form>
                             </div>
                           </div>
                         </div>
-                        <!-- delete -->
-                        <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">Delete</button>
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">Delete</button>
                         <div class="modal fade" id="delete<?= $id; ?>">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form method="post" action="">
                                 <div class="modal-body">
-                                  Are you sure you want to delete "<strong><?= htmlspecialchars($title); ?></strong>"?
+                                  Are you sure you want to delete "<strong><?= $title; ?></strong>"?
                                   <input type="hidden" name="id" value="<?= $id; ?>">
                                 </div>
                                 <div class="modal-footer">
@@ -237,7 +238,7 @@ require 'function-blog.php';
                               </form>
                             </div>
                           </div>
-                        </div> -->
+                        </div>
                       </td>
                     </tr>
                   <?php }; ?>
