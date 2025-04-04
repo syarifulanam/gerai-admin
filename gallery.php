@@ -2,6 +2,8 @@
 session_start();
 require 'check.php';
 require 'function-user.php';
+require 'function-gallery.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +30,17 @@ require 'function-user.php';
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+  <style>
+    .zoomable {
+      width: 100px;
+    }
 
+    .zoomable:hover {
+      transform: scale(2.5);
+      transition: 0.3s ease;
+    }
+  </style>
 </head>
 
 
@@ -50,6 +62,164 @@ require 'function-user.php';
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+          <h1 class="h3 mb-2 text-gray-800">Gallery</h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Data All Gallery</h6>
+            </div>
+            <div class="card-body">
+              <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAddGallery">
+                Add Gallery
+              </button>
+              <div class="modal fade" id="modalAddGallery">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form method="post" enctype="multipart/form-data">
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">Gallery</h4>
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                      </div>
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label class="form-label">Name</label>
+                          <input type="text" name="name" class="form-control" placeholder="enter name" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Description</label>
+                          <input type="text" name="description" class="form-control" placeholder="enter a description" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Picture</label>
+                          <input type="file" name="file" class="form-control">
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success" name="addGallery">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Picture</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>No</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Picture</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <?php
+                    $ambilsemuadatagallery = mysqli_query($conn, "SELECT * FROM gallery");
+
+                    $i = 1;
+                    while ($data = mysqli_fetch_array($ambilsemuadatagallery)) {
+                      $name = $data['name'];
+                      $id = $data['id'];
+                      $description = $data['description'];
+                      $picture = $data['picture'];
+
+                      $picture = $data['picture'];
+                      if ($picture == null) {
+                        $picture = 'No Photo';
+                      } else {
+                        $picture = '<img src="images/' . $picture . '" class="zoomable">';
+                      }
+
+                    ?>
+                      <tr>
+                        <td><?= $i++; ?></td>
+                        <td><?= $name; ?></td>
+                        <td><?= $description; ?></td>
+                        <td><?= $picture; ?></td>
+                        <td>
+                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?= $id; ?>">Edit</button>
+                          <!-- Edit -->
+                          <div class="modal fade" id="edit<?= $id; ?>">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <form method="post" action="gallery.php" enctype="multipart/form-data">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Gallery</h4>
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                  </div>
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+                                    <div class="mb-3">
+                                      <label class="form-label">Name</label>
+                                      <input type="text" name="name" value="<?= $name; ?>" class="form-control" placeholder="enter name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label class="form-label">Description</label>
+                                      <input type="text" name="description" value="<?= $description; ?>" class="form-control" placeholder="enter a description">
+                                    </div>
+                                    <input type="hidden" name="id" value="<?= $id; ?>">
+                                    <div class="mb-3">
+                                      <label class="form-label">Picture</label>
+                                      <input type="file" name="file" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-warning" name="updateGallery">Submit</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">Delete</button>
+                          <!-- Delete -->
+                          <div class="modal fade" id="delete<?= $id; ?>">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <form method="post" action="gallery.php">
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Delete Gallery</h4>
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                  </div>
+                                  <!-- Modal Body -->
+                                  <div class="modal-body">
+                                    Are you sure you want to delete <b><?= htmlspecialchars($name); ?></b>? <br>
+                                    <b>ID: <?= $id; ?></b>
+                                    <input type="hidden" name="id" value="<?= $id; ?>">
+                                  </div>
+                                  <!-- Modal Footer -->
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger" name="deleteGallery">Delete</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    <?php }; ?>
+                  </tbody>
+                </table>
+              </div>
+              </tr>
+            </div>
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -61,7 +231,7 @@ require 'function-user.php';
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 

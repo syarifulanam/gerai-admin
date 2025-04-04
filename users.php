@@ -28,7 +28,7 @@ require 'function-user.php';
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
 </head>
 
 
@@ -68,17 +68,17 @@ require 'function-user.php';
                                             <!-- Modal Header -->
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Users</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                                             </div>
                                             <!-- Modal body -->
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label class="form-label">Email User</label>
-                                                    <input type="email" name="emailuser" class="form-control" placeholder="masukan email" required>
+                                                    <input type="email" name="emailuser" class="form-control" placeholder="Input email" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Password</label>
-                                                    <input type="password" name="password" class="form-control" placeholder="masukan password baru" required>
+                                                    <input type="password" name="password" class="form-control" placeholder="Input New Password" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -129,17 +129,17 @@ require 'function-user.php';
                                                                     <!-- Modal Header -->
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">Users</h4>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                                                                     </div>
                                                                     <!-- Modal body -->
                                                                     <div class="modal-body">
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Email User</label>
-                                                                            <input type="email" name="emailuser" value="<?= $em; ?>" class="form-control" placeholder="masukan email baru" required>
+                                                                            <input type="email" name="emailuser" value="<?= $em; ?>" class="form-control" placeholder="Input New Email" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Password</label>
-                                                                            <input type="password" name="password" value="<?= $pw; ?>" class="form-control" placeholder="masukan password baru">
+                                                                            <input type="password" name="password" value="<?= $pw; ?>" class="form-control" placeholder="Input New Password">
                                                                         </div>
                                                                         <input type="hidden" name="id" value="<?= $iduser; ?>">
                                                                     </div>
@@ -161,7 +161,7 @@ require 'function-user.php';
                                                                     <!-- Modal Header -->
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">Delete User</h4>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                                                                     </div>
                                                                     <!-- Modal Body -->
                                                                     <div class="modal-body">
@@ -198,7 +198,7 @@ require 'function-user.php';
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
