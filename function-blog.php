@@ -35,15 +35,19 @@ if (isset($_POST['updateBlog'])) {
 
     // Jika ada file yang diupload
     $file_name = "";
+    $query = "";
     if (!empty($_FILES['file']['name'])) {
         $file_name = $_FILES['file']['name'];
         $file_tmp = $_FILES['file']['tmp_name'];
         $file_destination = "images/" . $file_name;
         move_uploaded_file($file_tmp, $file_destination);
+
+        $query = "UPDATE posts SET title='$title', content='$content', category_id='$category', media='$file_name' WHERE id='$id'";
+    } else {
+        $query = "UPDATE posts SET title='$title', content='$content', category_id='$category' WHERE id='$id'";
     }
 
 
-    $query = "UPDATE posts SET title='$title', content='$content', category_id='$category', media='$file_name' WHERE id='$id'";
     if (mysqli_query($conn, $query)) {
         echo "<script>alert('Blog updated successfully!'); window.location.href='blog.php';</script>";
     } else {
