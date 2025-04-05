@@ -164,11 +164,11 @@ require 'function-gallery.php';
                                   <div class="modal-body">
                                     <div class="mb-3">
                                       <label class="form-label">Name</label>
-                                      <input type="text" name="name" value="<?= $name; ?>" class="form-control" placeholder="enter name" required>
+                                      <input type="text" name="name" value="<?= $name; ?>" class="form-control" placeholder="input name" required>
                                     </div>
                                     <div class="mb-3">
                                       <label class="form-label">Description</label>
-                                      <input type="text" name="description" value="<?= $description; ?>" class="form-control" placeholder="enter a description">
+                                      <input type="text" name="description" value="<?= $description; ?>" class="form-control" placeholder="input description">
                                     </div>
                                     <input type="hidden" name="id" value="<?= $id; ?>">
                                     <div class="mb-3">
